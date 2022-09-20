@@ -1,51 +1,24 @@
-alx-higher_level_programming/0x00-python-hello_world/10-check_cycle.c
-@calebapril
-calebapril testing
-Latest commit e983bc4 on May 30
- History
- 1 contributor
-Executable File  43 lines (38 sloc)  635 Bytes
-
 #include "lists.h"
 
 /**
- * check_cycle - checks if a singly linked list has
- * a cycle in it
- * @list: pointer to the list
- * Return: 0 if there is no cycle,
- * 1 if there is a cycle
+ * check_cycle - finds the index at which a loop starts
+ * @head: list head
+ *
+ * Return: 0 if no cycle 1 if there is cycle
  */
-int check_cycle(listint_t *list)
+int check_cycle(listint_t *head)
 {
-	listint_t *p2;
-	listint_t *prev;
+	listint_t *fast = head, *slow = head;
 
-	p2 = list;
-	prev = list;
-	while (list && p2 && p2->next)
+
+	if (!head || !(head->next))
+		return (0);
+	while (slow && fast && fast->next)
 	{
-		list = list->next;
-		p2 = p2->next->next;
-
-		if (list == p2)
-		{
-			list = prev;
-			prev =  p2;
-			while (1)
-			{
-				p2 = prev;
-				while (p2->next != list && p2->next != prev)
-				{
-					p2 = p2->next;
-				}
-				if (p2->next == list)
-					break;
-
-				list = list->next;
-			}
+		slow = slow->next;
+		fast = fast->next->next;
+		if (slow == fast)
 			return (1);
-		}
 	}
-
 	return (0);
 }
