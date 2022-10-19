@@ -6,5 +6,3 @@
 class Rectangle:
     """Represent a rectangle."""
     pass
-Footer
-© 2022 GitHub, Inc.
